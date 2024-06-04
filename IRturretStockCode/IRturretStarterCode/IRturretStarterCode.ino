@@ -1,33 +1,33 @@
 /*
 
- ************************************************************************************
- * MIT License
- *
- * Copyright (c) 2023 Crunchlabs LLC (IRTurret Control Code)
- * Copyright (c) 2020-2022 Armin Joachimsmeyer (IRremote Library)
+************************************************************************************
+* MIT License
+*
+* Copyright (c) 2023 Crunchlabs LLC (IRTurret Control Code)
+* Copyright (c) 2020-2022 Armin Joachimsmeyer (IRremote Library)
 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is furnished
- * to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- ************************************************************************************
- */
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is furnished
+* to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+* INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+* PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+* CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+* OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*
+************************************************************************************
+*/
 
 //////////////////////////////////////////////////
-               //  LIBRARIES  //
+              //  LIBRARIES  //
 //////////////////////////////////////////////////
 #include <Arduino.h>
 #include <Servo.h>
@@ -91,7 +91,7 @@ int pitchMin = 10; // this sets the minimum angle of the pitch servo to prevent 
 
 
 //////////////////////////////////////////////////
-               //  S E T U P  //
+              //  S E T U P  //
 //////////////////////////////////////////////////
 void setup() {
     Serial.begin(9600); // initializes the Serial communication between the computer and the microcontroller
@@ -115,19 +115,19 @@ void setup() {
 }
 
 ////////////////////////////////////////////////
-               //  L O O P  //
+              //  L O O P  //
 ////////////////////////////////////////////////
 
 void loop() {
 
     /*
-     * Check if received data is available and if yes, try to decode it.
-     */
+    * Check if received data is available and if yes, try to decode it.
+    */
     if (IrReceiver.decode()) {
 
         /*
-         * Print a short summary of received data
-         */
+        * Print a short summary of received data
+        */
         IrReceiver.printIRResultShort(&Serial);
         IrReceiver.printIRSendUsage(&Serial);
         if (IrReceiver.decodedIRData.protocol == UNKNOWN) { //command garbled or not recognized
@@ -138,15 +138,15 @@ void loop() {
         Serial.println();
 
         /*
-         * !!!Important!!! Enable receiving of the next value,
-         * since receiving has stopped after the end of the current received data packet.
-         */
+        * !!!Important!!! Enable receiving of the next value,
+        * since receiving has stopped after the end of the current received data packet.
+        */
         IrReceiver.resume(); // Enable receiving of the next value
 
 
         /*
-         * Finally, check the received data and perform actions according to the received command
-         */
+        * Finally, check the received data and perform actions according to the received command
+        */
 
         switch(IrReceiver.decodedIRData.command){ //this is where the commands are handled
 
@@ -267,8 +267,8 @@ void downMove (int moves){
 }
 
 /**
-* fire does xyz
-*/
+ * fire does xyz
+ */
 void fire() { //function for firing a single dart
     rollServo.write(rollStopSpeed + rollMoveSpeed);//start rotating the servo
     delay(rollPrecision);//time for approximately 60 degrees of rotation
@@ -295,3 +295,4 @@ void homeServos(){
     pitchServoVal = 100; // store the pitch servo value
     Serial.println("HOMING");
 }
+   
